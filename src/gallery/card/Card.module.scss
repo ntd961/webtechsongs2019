@@ -1,0 +1,9 @@
+.card {
+	border: 2px solid #2d2d2d;
+	padding: 10px;
+
+	.cardImage {
+		display: flex;
+		max-width: 100%;
+	}
+}
