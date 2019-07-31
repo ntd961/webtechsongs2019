@@ -24,6 +24,18 @@ const cars: Car[] = [
 		name: "S-Klasse Limousine",
 		category: "Oberklasse",
 		image: "https://www.mercedes-benz.com/content/dam/brandhub/mercedes-benz/vehicles/passenger-cars/s-class/mercedes-benz-fahrzeuge-s-klasse-w-222-s-500-selenitgrau-metallic-2560x1440-2560x1440.jpg"
+	},
+	{
+		brand: "Tesla",
+		name: "Model S",
+		category: "Oberklasse",
+		image: "https://www.tesla.com/content/dam/tesla-site/sx-redesign/img/socialcard/MS.jpg"
+	},
+	{
+		brand: "Audi",
+		name: "Q5",
+		category: "Geländewagen(SUV)",
+		image: "https://www.audi.de/content/dam/nemo/models/q5/q5/my-2019/1920x1080-inline-media-gallery/1920x1080_0012_AQ5_161010.jpg"
 	}
 ];
 

@@ -13,8 +13,8 @@ class Card extends Component<CardProperties, any> {
 				<img className={styles.cardImage} alt={this.props.car.brand + " " + this.props.car.name} src={this.props.car.image}/>
 				<h3>{this.props.car.brand} {this.props.car.name}</h3>
 				<div className="badge-grid">
-					<a href="#" className="badge">{this.props.car.brand}</a>
-					<a href="#" className="badge">{this.props.car.category}</a>
+					<a href="/" className="badge">{this.props.car.brand}</a>
+					<a href="/" className="badge">{this.props.car.category}</a>
 				</div>
 			</div>
 		);
