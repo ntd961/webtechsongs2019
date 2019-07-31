@@ -1,24 +1,45 @@
-import React, {Component} from "react";
+import React from "react";
 import styles from "./Card.module.scss";
-import {Car} from "../../App";
 
 interface CardProperties {
-	car: Car;
+	title: string;
+	image: string;
+	badges: string[];
+	onDetailsClick?: Function;
+	onBadgeClick?: Function;
 }
 
-class Card extends Component<CardProperties, any> {
-	render() {
-		return (
-			<div className={styles.card}>
-				<img className={styles.cardImage} alt={this.props.car.brand + " " + this.props.car.name} src={this.props.car.image}/>
-				<h3>{this.props.car.brand} {this.props.car.name}</h3>
-				<div className="badge-grid">
-					<a href="/" className="badge">{this.props.car.brand}</a>
-					<a href="/" className="badge">{this.props.car.category}</a>
-				</div>
+const Card = (props: CardProperties) => {
+	const handleBadgeClick = (e: React.MouseEvent<HTMLButtonElement>, value: string) => {
+		e.preventDefault();
+		e.stopPropagation();
+		if (props.onBadgeClick) {
+			props.onBadgeClick(value);
+		}
+	};
+
+	const handleCardClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		e.stopPropagation();
+		if (props.onDetailsClick) {
+			props.onDetailsClick();
+		}
+	};
+
+	return (
+		<div className={styles.card}>
+			<img className={styles.cardImage} alt={props.title} src={props.image}/>
+			<h3>{props.title}</h3>
+			<div className="badge-grid">
+				{props.badges.map((badge: string, i: number) =>
+					<button key={i} className="badge" onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleBadgeClick(e, badge)}>{badge}</button>
+				)}
 			</div>
-		);
-	}
-}
+			{props.onDetailsClick ? (
+				<button className={"btn " + styles.detailsButton} onClick={handleCardClick}>Details</button>
+			) : null}
+		</div>
+	);
+};
 
 export default Card;

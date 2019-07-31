@@ -1,9 +1,16 @@
 .card {
+	display: flex;
+	flex-direction: column;
 	border: 2px solid #2d2d2d;
 	padding: 10px;
 
 	.cardImage {
 		display: flex;
+		align-self: flex-start;
 		max-width: 100%;
+	}
+
+	.detailsButton {
+		margin-top: 10px;
 	}
 }

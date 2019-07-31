@@ -4,7 +4,26 @@
 	border: 2px solid #2d2d2d;
 
 	.navigationHeadline {
+		display: block;
 		font-size: 60px;
 		margin: 0;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+}
+
+@media (max-width: 800px) {
+	.navigation {
+		.navigationHeadline {
+			font-size: 40px;
+		}
+	}
+}
+
+@media (max-width: 500px) {
+	.navigation {
+		.navigationHeadline {
+			font-size: 26px;
+		}
 	}
 }

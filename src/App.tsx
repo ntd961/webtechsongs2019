@@ -1,62 +1,28 @@
-import React, {Component} from "react";
-import Navigation from "./navigation/Navigation";
-import Gallery from "./gallery/Gallery";
-import styles from "./App.module.css";
-import Footer from "./footer/Footer";
-import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
+import React from "react";
+import {BrowserRouter, Redirect, Route, RouteComponentProps, Switch} from "react-router-dom";
+import DashboardPage from "./pages/dashboard-page/DashboardPage";
+import {AppContext, Services} from "./services/Services";
+import SongService from "./services/song-service/SongService";
+import SongPage from "./pages/song-page/SongPage";
+import ImpressPage from "./pages/impress-page/ImpressPage";
 
-export interface Car {
-	name: string;
-	brand: string;
-	category: string;
-	image: string;
-}
+const App = () => {
+	const appContext: Services = {
+		songService: new SongService()
+	};
 
-const cars: Car[] = [
-	{
-		brand: "Lamborghini",
-		name: "Aventador",
-		category: "Sportwagen",
-		image: "https://st.motortrend.com/uploads/sites/11/2019/03/2020-Lamborghini-Aventador-SVJ-Roadster-02.jpg"
-	},
-	{
-		brand: "Mercedes-Benz",
-		name: "S-Klasse Limousine",
-		category: "Oberklasse",
-		image: "https://www.mercedes-benz.com/content/dam/brandhub/mercedes-benz/vehicles/passenger-cars/s-class/mercedes-benz-fahrzeuge-s-klasse-w-222-s-500-selenitgrau-metallic-2560x1440-2560x1440.jpg"
-	},
-	{
-		brand: "Tesla",
-		name: "Model S",
-		category: "Oberklasse",
-		image: "https://www.tesla.com/content/dam/tesla-site/sx-redesign/img/socialcard/MS.jpg"
-	},
-	{
-		brand: "Audi",
-		name: "Q5",
-		category: "Geländewagen(SUV)",
-		image: "https://www.audi.de/content/dam/nemo/models/q5/q5/my-2019/1920x1080-inline-media-gallery/1920x1080_0012_AQ5_161010.jpg"
-	}
-];
-
-const dashboard = (<div className={styles.pageWrapper}>
-	<Navigation/>
-	<Gallery cars={cars}/>
-	<Footer/>
-</div>);
-
-class App extends Component {
-	render() {
-		return (
+	return (
+		<AppContext.Provider value={appContext}>
 			<BrowserRouter>
 				<Switch>
 					<Redirect exact from="/" to="/dashboard"/>
-					<Route path="/dashboard" component={() => dashboard}/>
-					<Route path="/impressum" component={() => <div>Test</div>}/>
+					<Route path="/dashboard" component={() => <DashboardPage/>}/>
+					<Route path="/songs/:songId" component={(props: RouteComponentProps) => <SongPage {...props}/>}/>
+					<Route path="/impress" component={() => <ImpressPage/>}/>
 				</Switch>
 			</BrowserRouter>
-		);
-	}
-}
+		</AppContext.Provider>
+	);
+};
 
 export default App;
