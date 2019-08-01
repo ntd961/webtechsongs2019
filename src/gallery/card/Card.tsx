@@ -9,7 +9,9 @@ interface CardProperties {
 	onBadgeClick?: Function;
 }
 
+
 const Card = (props: CardProperties) => {
+
 	const handleBadgeClick = (e: React.MouseEvent<HTMLButtonElement>, value: string) => {
 		e.preventDefault();
 		e.stopPropagation();
