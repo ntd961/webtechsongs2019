@@ -1,0 +1,25 @@
+@import "../../../styles/variables";
+
+.card {
+	max-width: 100%;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid $borderColor;
+	border-radius: 0 0 $borderRadius $borderRadius;
+
+	> .content {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+		padding: 10px;
+
+		> h3 {
+			margin-top: 10px;
+		}
+
+		.badges {
+			margin-top: auto;
+			margin-bottom: 5px;
+		}
+	}
+}

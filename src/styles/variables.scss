@@ -1,0 +1,74 @@
+$borderRadius: 2px;
+$borderColor: rgba(34, 36, 38, .15);
+$bodyColor: #d6dbd7;
+$contentBackgroundColor: #fff;
+
+$grid-columns: 12;
+$grid-breakpoints: (
+	xs: 0,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px
+);
+
+$spacer: 1rem;
+$spacers: (
+	0: 0,
+	1: ($spacer * .25),
+	2: ($spacer * .5),
+	3: $spacer,
+	4: ($spacer * 1.5),
+	5: ($spacer * 3)
+);
+
+$borderRadiusNames: (
+	border-radius: "border-radius",
+	border-top-left-radius: "border-top-left-radius",
+	border-top-right-radius: "border-top-right-radius",
+	border-bottom-left-radius: "border-bottom-left-radius",
+	border-bottom-right-radius: "border-bottom-right-radius"
+);
+$paddingNames: (
+	padding: "p",
+	padding-top: "pt",
+	padding-right: "pr",
+	padding-bottom: "pb",
+	padding-left: "pl"
+);
+$marginNames: (
+	margin: "m",
+	margin-top: "mt",
+	margin-right: "mr",
+	margin-bottom: "mb",
+	margin-left: "ml",
+);
+$spacingUtilities: map_merge($marginNames, $paddingNames);
+
+@function repeater($item, $count, $spacer) {
+	$string: "";
+	@for $i from 1 through $count {
+		$string: $string + $spacer + $item;
+	}
+	@return #{$string};
+}
+
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+	$min: map-get($breakpoints, $name);
+	@return if($min != 0, $min, null);
+}
+
+@function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+	@return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}");
+}
+
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+	$min: breakpoint-min($name, $breakpoints);
+	@if $min {
+		@media (min-width: $min) {
+			@content;
+		}
+	} @else {
+		@content;
+	}
+}

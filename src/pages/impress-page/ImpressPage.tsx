@@ -1,15 +1,15 @@
 import styles from "./ImpressPage.module.scss";
-import Navigation from "../../navigation/Navigation";
-import Footer from "../../footer/Footer";
+import Navigation from "../../components/navigation/Navigation";
+import Footer from "../../components/footer/Footer";
 import React from "react";
 
 const ImpressPage = () => {
 	return (
-		<div className="page-wrapper">
+		<div className="page">
 			<Navigation/>
-			<div>
-				<h2>Impressum</h2>
-				<div className={styles.impressWrapper}>
+			<div className="content-wrapper">
+				<h2 className="mb-3">Impressum</h2>
+				<div className="mb-3">
 					<div>Hochschule für Technik und Wirtschaft Berlin</div>
 					<div>Der Präsident</div>
 					<div>Treskowallee 8</div>

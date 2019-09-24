@@ -1,20 +1,10 @@
-import React, {ComponentType, Context, ContextType, createContext, PureComponent} from "react";
+import {Context, createContext} from "react";
 import SongService from "./song-service/SongService";
+import AuthenticationService from "./authentication-service/AuthenticationService";
 
 export interface Services {
-	songService?: SongService;
+	songService: SongService;
+	authenticationService: AuthenticationService;
 }
 
-export const AppContext: Context<Services> = createContext({});
-
-export const withServices = <P extends Services>(Component: ComponentType<P>) => {
-	return class extends PureComponent<P> {
-		static contextType = AppContext;
-		context!: ContextType<typeof AppContext>;
-
-		render() {
-			const props = {...this.context, ...this.props};
-			return <Component {...props as P}/>;
-		}
-	};
-};
+export const ServicesContext: Context<Services> = createContext({} as Services);

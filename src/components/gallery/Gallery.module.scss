@@ -1,0 +1,77 @@
+@import "../../styles/variables";
+
+$columnsPerRow: (
+	xs: 1,
+	sm: 2,
+	md: 3,
+	lg: 4
+);
+
+.filterWrapper {
+	display: grid;
+	grid-template-columns: 1fr;
+	margin-bottom: 10px;
+
+	> .searchBar {
+		display: block;
+		padding: 10px;
+		border: 1px solid rgba(34, 36, 38, .15);
+		border-radius: 0;
+		border-top-width: 0;
+		border-bottom-width: 0;
+	}
+}
+
+@include media-breakpoint-up(sm) {
+	.filterWrapper {
+		grid-template-columns: auto 1fr auto;
+
+		> .searchBar {
+			border-top-width: 1px;
+			border-bottom-width: 1px;
+			border-right-width: 0;
+			border-left-width: 0;
+		}
+	}
+}
+
+.gallery {
+	display: grid;
+	grid-gap: 20px;
+	max-width: 100%;
+
+	.image {
+		display: flex;
+		align-self: flex-start;
+		max-width: 100%;
+		width: 100%;
+	}
+
+	> .spanFullWidth {
+		max-width: 100%;
+		display: flex;
+	}
+
+	.newCard {
+		display: flex;
+		align-items: center;
+		font-size: 40px;
+		cursor: pointer;
+
+		> svg {
+			margin: auto;
+		}
+	}
+}
+
+@each $key, $value in $columnsPerRow {
+	@include media-breakpoint-up($key) {
+		.gallery {
+			grid-template-columns: repeat($value, 1fr);
+
+			.spanFullWidth {
+				grid-column: span $value;
+			}
+		}
+	}
+}

@@ -1,0 +1,36 @@
+@import "variables";
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+	@include media-breakpoint-up($breakpoint) {
+		$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+		// spacing utils
+		@each $prop, $abbrev in $spacingUtilities {
+			@each $spacerId, $spacerValue in $spacers {
+				&.#{$abbrev}#{$infix}-#{$spacerId} {
+					#{$prop}: $spacerValue !important;
+				}
+			}
+		}
+
+		// margin/padding auto spacing
+		@each $prop, $abbrev in $marginNames {
+			&.#{$abbrev}#{$infix}-auto {
+				#{$prop}: auto !important;
+			}
+		}
+
+		// border-radius helpers
+		@each $prop, $abbrev in $borderRadiusNames {
+			&.#{$abbrev}#{$infix}-0 {
+				#{$prop}: 0 !important;
+			}
+		}
+
+		@each $prop, $abbrev in $borderRadiusNames {
+			&.#{$abbrev}#{$infix}-on {
+				#{$prop}: $borderRadius !important;
+			}
+		}
+	}
+}

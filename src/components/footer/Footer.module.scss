@@ -1,0 +1,16 @@
+@import "../../styles/variables";
+
+.footer {
+	padding: 20px;
+	background-color: #f0f8ff;
+	border-radius: 0 0 $borderRadius*2 $borderRadius*2;
+	border-top: 1px solid $borderColor;
+
+	> .footerGrid {
+		display: inline-grid;
+		grid-template-columns: auto;
+		grid-template-rows: 1fr;
+		grid-auto-flow: column;
+		grid-gap: 6px;
+	}
+}

@@ -1,18 +1,19 @@
-import Navigation from "../../components/navigation/Navigation";
-import SongGallery from "../../components/gallery/Gallery";
-import Footer from "../../components/footer/Footer";
 import React from "react";
+import Navigation from "../../components/navigation/Navigation";
+import Footer from "../../components/footer/Footer";
+import NewSong from "../../components/new-song/NewSong";
 
-const DashboardPage = () => {
+const NewSongPage = () => {
+
 	return (
 		<div className="page">
 			<Navigation/>
 			<div className="content-wrapper">
-				<SongGallery/>
+				<NewSong/>
 			</div>
 			<Footer/>
 		</div>
 	);
 };
 
-export default DashboardPage;
+export default NewSongPage;

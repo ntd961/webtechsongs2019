@@ -1,0 +1,101 @@
+@import "variables";
+
+.align-items-center {
+	align-items: center !important;
+}
+
+.grid {
+	max-width: 100%;
+	margin: 0;
+	padding: 0;
+
+	// direct children are always grid items as specified by the specs
+	> * {
+		display: block;
+		width: 100%;
+		max-width: 100%;
+		margin-bottom: 10px;
+	}
+}
+
+@supports (grid-template-columns: 1fr) {
+	.grid {
+		display: grid;
+		grid-template-columns: 100%;
+		align-items: stretch;
+
+		&.grid-inline {
+			display: inline-grid;
+		}
+
+		&.grid-dense {
+			grid-auto-flow: dense;
+		}
+
+		// direct children are always grid items as specified by the specs
+		> * {
+			width: auto;
+			margin-bottom: 0 !important;
+
+			// grid-row and grid-column helpers
+			@each $breakpoint in map-keys($grid-breakpoints) {
+				@include media-breakpoint-up($breakpoint) {
+					$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+					@each $prop, $abbrev in (grid-row: grid-row, grid-column: grid-column) {
+						@for $size from 1 through $grid-columns {
+							&.#{$abbrev}#{$infix}-#{$size} {
+								#{$prop}: span $size !important;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		// grid-inline helpers
+		@each $breakpoint in map-keys($grid-breakpoints) {
+			@include media-breakpoint-up($breakpoint) {
+				$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+				&.grid#{$infix}-inline {
+					display: inline-grid !important;
+				}
+			}
+		}
+
+		// grid-template-columns helpers
+		@each $breakpoint in map-keys($grid-breakpoints) {
+			@include media-breakpoint-up($breakpoint) {
+				$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+				@each $prop, $abbrev in (grid-template-columns: grid-template-columns) {
+					@for $size from 1 through $grid-columns {
+						&.#{$abbrev}#{$infix}-#{$size} {
+							#{$prop}: repeater(1fr, $size, " ") !important;
+						}
+
+						&.#{$abbrev}#{$infix}-auto-#{$size} {
+							#{$prop}: auto repeater(1fr, $size - 1, " ") !important;
+						}
+					}
+				}
+			}
+		}
+
+		// grid-gap helpers
+		@each $breakpoint in map-keys($grid-breakpoints) {
+			@include media-breakpoint-up($breakpoint) {
+				$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+				@each $prop, $abbrev in (grid-gap: grid-gap) {
+					@each $size, $length in $spacers {
+						&.#{$abbrev}#{$infix}-#{$size} {
+							#{$prop}: $length !important;
+						}
+					}
+				}
+			}
+		}
+	}
+}
